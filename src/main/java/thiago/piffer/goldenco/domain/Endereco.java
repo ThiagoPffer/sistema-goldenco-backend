@@ -1,6 +1,7 @@
-package thiago.piffer.goldenco.model;
+package thiago.piffer.goldenco.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import thiago.piffer.goldenco.domain.util.BaseBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,7 +24,7 @@ public class Endereco implements Serializable {
     private String complemento;
 
     @JsonIgnore
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
@@ -33,72 +34,36 @@ public class Endereco implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getCep() {
         return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
     }
 
     public String getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
     public String getEstado() {
         return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public String getPais() {
         return pais;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
     public String getLogradouro() {
         return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
     }
 
     public String getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public String getComplemento() {
         return complemento;
     }
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
     public Cliente getCliente() {
         return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     @Override
@@ -112,5 +77,59 @@ public class Endereco implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static class Builder extends BaseBuilder<Endereco> {
+
+        private Builder(Endereco entity) { super(entity); }
+        public static Builder create() { return new Builder(new Endereco()); }
+
+        public Builder id(Long id) {
+            entity.id = id;
+            return this;
+        }
+
+        public Builder cep(String cep) {
+            entity.cep = cep;
+            return this;
+        }
+
+        public Builder cidade(String cidade) {
+            entity.cidade = cidade;
+            return this;
+        }
+
+        public Builder estado(String estado) {
+            entity.estado = estado;
+            return this;
+        }
+
+        public Builder pais(String pais) {
+            entity.pais = pais;
+            return this;
+        }
+
+        public Builder logradouro(String logradouro) {
+            entity.logradouro = logradouro;
+            return this;
+        }
+
+        public Builder numero(String numero) {
+            entity.numero = numero;
+            return this;
+        }
+
+        public Builder complemento(String complemento) {
+            entity.complemento = complemento;
+            return this;
+        }
+
+        public Builder cliente(Cliente cliente) {
+            entity.cliente = cliente;
+            return this;
+        }
+
+        @Override
+        public void beforeBuild() {}
     }
 }

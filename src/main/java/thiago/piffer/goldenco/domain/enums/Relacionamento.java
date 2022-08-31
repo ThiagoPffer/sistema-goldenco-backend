@@ -1,13 +1,15 @@
-package thiago.piffer.goldenco.model.enums;
+package thiago.piffer.goldenco.domain.enums;
 
-public enum Sexo {
-    MASCULINO(1, "Masculino"),
-    FEMININO(2, "Feminino");
+public enum Relacionamento {
+
+    NAMORADOS(1, "Namorados"),
+    NOIVOS(2, "Noivos"),
+    CASADOS(3, "Casados");
 
     private int cod;
     private String desc;
 
-    Sexo(int cod, String desc) {
+    Relacionamento(int cod, String desc) {
         this.cod = cod;
         this.desc = desc;
     }
@@ -20,10 +22,10 @@ public enum Sexo {
         return desc;
     }
 
-    public static Sexo toEnum(Integer cod) {
+    public static Relacionamento toEnum(Integer cod) {
         if(cod == null) { return null; }
 
-        for(Sexo value : Sexo.values()) {
+        for(Relacionamento value : Relacionamento.values()) {
             if(cod.equals(value.getCod())) { return value; }
         }
 
